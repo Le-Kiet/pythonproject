@@ -1,0 +1,262 @@
+{% extends "app/base.html" %}
+<!--zmxnbczmxncbzmxcbzxmczxncmzxcbnm-->
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+    <script>
+      // Lấy tham số category từ URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const categoryName = urlParams.get("category");
+
+      // Sử dụng giá trị categoryName theo ý muốn
+      console.log(urlParams); // In ra "mobile" trong trường hợp này
+      var dropdownList = document.getElementsByClassName("dropdown-list")[0];
+      var displayedValues = [...new Set(displayedValues)];
+      displayedValues.forEach(function (value) {
+        var listItem = document.createElement("li");
+        listItem.style.textDecoration = "none";
+        listItem.style.listStyleType = "none";
+        listItem.style.color = "red";
+        var link = document.createElement("a");
+        link.className = "dropdown-item";
+        link.innerHTML = value;
+        listItem.appendChild(link);
+        dropdownList.appendChild(listItem);
+      });
+    </script>
+  </head>
+  <body>
+    {% block register %}
+
+    <div class="row" style="width: 100%">
+      <div style="display: flex; margin-top: 16px; margin-left: 24px">
+        <div class="row" style="width: 100%">
+          <div>
+            <span>Sắp xếp theo</span>
+            <button
+              data-action="sort"
+              data-value="popular"
+              class="btn btn-outline-secondary add-btn sort"
+              style="
+                background: #f05d40;
+                color: white;
+                border: 1px solid #f05d40;
+              "
+            >
+              Phổ biến
+            </button>
+            <button
+              data-action="sort"
+              data-value="newest"
+              class="btn btn-outline-secondary add-btn sort"
+              style="
+                background: #f05d40;
+                color: white;
+                border: 1px solid #f05d40;
+              "
+            >
+              Mới nhất
+            </button>
+            <button
+              data-action="sort"
+              data-value="bestseller"
+              class="btn btn-outline-secondary add-btn sort"
+              style="
+                background: #f05d40;
+                color: white;
+                border: 1px solid #f05d40;
+              "
+            >
+              Bán chạy
+            </button>
+            <button
+              data-action="sort"
+              data-value="price"
+              class="btn btn-outline-secondary add-btn sort"
+              style="
+                background: #f05d40;
+                color: white;
+                border: 1px solid #f05d40;
+              "
+            >
+              Giá
+            </button>
+          </div>
+        </div>
+      </div>
+      <h1 style="margin-left: 24px">Kết quả tìm kiếm:</h1>
+      <div></div>
+      {% for product in products%}
+      <div class="col-lg-4" style="width: 25%">
+        <img class="thumbnail" src="{{product.ImageURL}}" style="width: 100%" />
+        <div class="box-element product">
+          <div style="margin-top: 10px">
+            <h6>{{product.name}}</h6>
+
+            <h4 style="display: inline-block; color: #f05d40">
+              <strong id="price" class="price">{{product.get_total }} $</strong>
+            </h4>
+            {% if product.discount != 0 %}
+            <h4
+              style="
+                display: inline-block;
+                color: rgba(0, 0, 0, 0.54);
+                text-decoration: line-through;
+                margin-left: 4px;
+              "
+            >
+              <strong id="discounted" class="discounted">
+                {{product.price }} $</strong
+              >
+            </h4>
+            <span
+              id="discount"
+              class="discount"
+              style="
+                color: #f05d40;
+                font-size: 20px;
+                background-color: #feeeea;
+                margin-left: 4px;
+              "
+            >
+              -{{product.discount}} %</span
+            >
+            {% endif %}
+          </div>
+          <hr />
+          <button
+            data-product="{{product.id}}"
+            data-action="add"
+            class="btn btn-outline-secondary add-btn update-cart"
+            style="
+              border: 1px solid #ee4d2d;
+              background-color: rgba(255, 87, 34, 0.1);
+              color: #ee4d2d;
+            "
+          >
+            <img
+              id="cart-icon"
+              src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/0f3bf6e431b6694a9aac.svg"
+            />
+            Thêm vào giỏ hàng
+          </button>
+          <a
+            class="btn btn-outline-success"
+            style="background: #f05d40; color: white; border: 1px solid #f05d40"
+            href="{%url 'detail'%}?id={{product.id}}"
+            >Xem</a
+          >
+
+          {% comment %}
+          <div class="bg-color-shoppee font-100">aaaaaaaaaaaa</div>
+          {% endcomment %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <br /><br /><br /><br />
+
+    {% endblock register %}
+    <script>
+      //var products = JSON.parse("{{ products}}"); // Chuyển đổi danh sách products sang định dạng JSON
+      function sortProducts(action, value) {
+        if (action === "sort") {
+          if (value === "price") {
+            products.sort(function (a, b) {
+              return b.price - a.price; // Sắp xếp theo giá từ cao đến thấp
+            });
+          }
+
+          renderProducts();
+        }
+      }
+
+      function renderProducts() {
+        var productsContainer = document.getElementById("products-container");
+        productsContainer.innerHTML = ""; // Xóa nội dung hiện tại của products container
+
+        products.forEach(function (product) {
+          var productElement = document.createElement("div");
+          productElement.className = "col-lg-5";
+
+          var thumbnailImage = document.createElement("img");
+          thumbnailImage.className = "thumbnail";
+          thumbnailImage.src = product.ImageURL;
+          productElement.appendChild(thumbnailImage);
+
+          var boxElement = document.createElement("div");
+          boxElement.className = "box-element product";
+
+          var productName = document.createElement("h6");
+          productName.innerHTML = "<strong>" + product.name + "</strong>";
+          boxElement.appendChild(productName);
+
+          var addButton = document.createElement("button");
+          addButton.dataset.product = product.id;
+          addButton.dataset.action = "add";
+          addButton.className = "btn btn-outline-secondary add-btn update-cart";
+          addButton.innerHTML = "Thêm vào giỏ hàng";
+          boxElement.appendChild(addButton);
+
+          var viewButton = document.createElement("a");
+          viewButton.className = "btn btn-outline-success";
+          viewButton.href = "#";
+          viewButton.innerHTML = "Xem";
+          boxElement.appendChild(viewButton);
+
+          var productPrice = document.createElement("h4");
+          productPrice.style.display = "inline-block";
+          productPrice.style.float = "right";
+          productPrice.innerHTML = "<strong>" + product.price + " $</strong>";
+          boxElement.appendChild(productPrice);
+
+          productElement.appendChild(boxElement);
+          productsContainer.appendChild(productElement);
+        });
+      }
+
+      renderProducts();
+    </script>
+    <script src="" async defer></script>
+  </body>
+</html>
+{% comment %}
+<h1>1111111</h1>
+{%for category in categories %}
+
+<li style="text-decoration: none; list-style-type: none">
+  <a
+    class="dropdown-item"
+    href="{% url 'category' %}?category={{category.slug}}"
+    >{{category.name}}</a
+  >
+</li>
+{%endfor%} Nơi bán
+<li style="text-decoration: none; list-style-type: none">
+  <a
+    class="dropdown-item"
+    href="{% url 'category' %}?category={{category.slug}}"
+    >Hồ Chí Minh</a
+  >
+</li>
+<li style="text-decoration: none; list-style-type: none">
+  <a
+    class="dropdown-item"
+    href="{% url 'category' %}?category={{category.slug}}"
+    >Hà Nội</a
+  >
+</li>
+<li style="text-decoration: none; list-style-type: none">
+  <a
+    class="dropdown-item"
+    href="{% url 'category' %}?category={{category.slug}}"
+    >Huế</a
+  >
+</li>
+{% endcomment %}

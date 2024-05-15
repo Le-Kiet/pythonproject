@@ -1,0 +1,81 @@
+{% extends "app/base.html" %}
+<!--zmxnbczmxncbzmxcbzxmczxncmzxcbnm-->
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+    <script>
+      const csrftoken = getCookie("csrftoken");
+      (function (d, m) {
+        var kommunicateSettings = {
+          appId: "82471e9fb890a85cf6f7f9c92bc015ed",
+          popupWidget: true,
+          automaticChatOpenOnNavigation: true,
+        };
+        var s = document.createElement("script");
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0];
+        h.appendChild(s);
+        window.kommunicate = m;
+        m._globals = kommunicateSettings;
+      })(document, window.kommunicate || {});
+    </script>
+  </head>
+  <body>
+    {% block register %}
+    <section class="vh-100 bg-image"
+  style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Login</h2>
+
+              <form method="POST" action=''>
+                {% csrf_token %}
+                <div data-mdb-input-init class="form-outline mb-4">
+                  <label class="form-label"  for="form3Example1cg">Your Name</label>
+                  <input type="text" id="form3Example1cg" name="username" class="form-control form-control-lg" />
+                </div>
+                <div data-mdb-input-init class="form-outline mb-4">
+                  <label class="form-label" for="form3Example4cg">Password</label>
+                  <input type="password" name="password" id="form3Example1cg" class="form-control form-control-lg" />
+                </div>
+                <div class="d-flex justify-content-center">
+                  <button  type="submit" data-mdb-button-init
+                    data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
+                </div>
+                <p class="text-center text-muted mt-5 mb-0">You dont have an account? 
+                  <a href="{% url 'register' %}" class="fw-bold text-body"><u>Register here</u></a></p>
+                {% for message in messages %}
+                <p id='message' class="text-center text-muted mt-5 mb-0">{{message}}
+
+                {% endfor %}
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+    {% comment %} <h5>Register</h5>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" name="Create user"></input>
+    </form> {% endcomment %}
+    {% endblock register %}
+    <script src="" async defer></script>
+  </body>
+</html>

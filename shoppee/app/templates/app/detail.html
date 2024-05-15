@@ -1,0 +1,91 @@
+{% extends "app/base.html" %}
+<!--zmxnbczmxncbzmxcbzxmczxncmzxcbnm-->
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+  </head>
+  <body>
+    {% block register %}
+    {% for product in products%}
+    <div class="container">
+      <div class="col-lg-8 border p-3 main-section bg-white">
+          <div class="row hedding m-0 pl-3 pt-0 pb-3">
+              Product Detail Design Using Bootstrap 4.0
+          </div>
+          <div class="row m-0">
+              <div class="col-lg-4 left-side-product-box pb-3" style="position:relative;display:flex">
+                  <img class="thumbnail" src="{{product.ImageURL}}" class="border p-3" style="width:80%,height:100%">
+                  {% comment %} <span class="sub-img">
+                      <img src="http://nicesnippets.com/demo/pd-image2.jpg" class="border p-2">
+                      <img src="http://nicesnippets.com/demo/pd-image3.jpg" class="border p-2">
+                      <img src="http://nicesnippets.com/demo/pd-image4.jpg" class="border p-2">
+                  </span> {% endcomment %}
+              </div>
+              <div class="col-lg-8">
+                  <div class="right-side-pro-detail border p-3 m-0">
+                      <div class="row">
+                          <div class="col-lg-12">
+                              <p class="m-0 p-0">{{product.name}}</p>
+                          </div>
+                          <div class="col-lg-12">
+                              <p class="m-0 p-0 price-pro">{{product.price}} $</p>
+                              <hr class="p-0 m-0">
+                          </div>
+                          <div class="col-lg-12 pt-2">
+                              <h5>Product Detail</h5>
+                              <span>{{product.detail}}</span>
+                              <hr class="m-0 pt-2 mt-2">
+                          </div>
+                          {% comment %} <div class="col-lg-12">
+                              <p class="tag-section"><strong>Tag : </strong><a href="">{{category.name}}</a><a href="">,Man</a></p>
+                          </div> {% endcomment %}
+                          <div class="col-lg-12" style="display:flex;align-items: center">
+                              <h6  style="width:100px">Số lượng :</h6>
+                              <input type="number" class="form-control text-center w-100" value="1">
+                          </div>
+                          <div class="col-lg-12 mt-3">
+                              <div class="row">
+                                  <div class="col-lg-6 pb-2">
+                                    <button
+                                    data-product="{{product.id}}"
+                                    data-action="add"
+                                    class="btn btn-outline-secondary add-btn update-cart"
+                                    style="
+                                      border: 1px solid #ee4d2d;
+                                      background-color: rgba(255, 87, 34, 0.1);
+                                      color: #ee4d2d;
+                                    "
+                                  >
+                                    <img
+                                      id="cart-icon"
+                                      src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/0f3bf6e431b6694a9aac.svg"
+                                    />
+                                    Thêm vào giỏ hàng
+                                  </button>
+                                  </div>
+                                  {% comment %} <div class="col-lg-6">
+                                      <a href="#" class="btn btn-success w-100">Shop Now</a>
+                                  </div> {% endcomment %}
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    </div>
+    {% endfor%}
+    <br /><br /><br /><br />
+    <br /><br /><br /><br />
+    <br /><br /><br /><br />
+    {% endblock register %}
+    <script src="" async defer></script>
+  </body>
+</html>

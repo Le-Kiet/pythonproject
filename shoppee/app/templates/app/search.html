@@ -1,0 +1,93 @@
+{% extends "app/base.html" %}
+<!--zmxnbczmxncbzmxcbzxmczxncmzxcbnm-->
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+  </head>
+  <body>
+    {% block register %}
+    <h5 style="margin-left: 24px; margin-top: 24px; font-size: 32px">
+      Kết quả tìm kiếm cho từ khóa: {{searched}}
+    </h5>
+    <div class="row" style="width: 100%; margin-left: 24px">
+      {% for product in keys%}
+      <div class="col-lg-4" style="width: 25%">
+        <img class="thumbnail" src="{{product.ImageURL}}" style="width: 100%" />
+        <div class="box-element product">
+          <div style="margin-top: 10px">
+            <h6>{{product.name}}</h6>
+
+            <h4 style="display: inline-block; color: #f05d40">
+              <strong id="price" class="price">{{product.get_total }} $</strong>
+            </h4>
+            {% if product.discount != 0 %}
+            <h4
+              style="
+                display: inline-block;
+                color: rgba(0, 0, 0, 0.54);
+                text-decoration: line-through;
+                margin-left: 4px;
+              "
+            >
+              <strong id="discounted" class="discounted">
+                {{product.price }} $</strong
+              >
+            </h4>
+            <span
+              id="discount"
+              class="discount"
+              style="
+                color: #f05d40;
+                font-size: 20px;
+                background-color: #feeeea;
+                margin-left: 4px;
+              "
+            >
+              -{{product.discount}} %</span
+            >
+            {% endif %}
+          </div>
+          <hr />
+          <button
+            data-product="{{product.id}}"
+            data-action="add"
+            class="btn btn-outline-secondary add-btn update-cart"
+            style="
+              border: 1px solid #ee4d2d;
+              background-color: rgba(255, 87, 34, 0.1);
+              color: #ee4d2d;
+            "
+          >
+            <img
+              id="cart-icon"
+              src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/0f3bf6e431b6694a9aac.svg"
+            />
+            Thêm vào giỏ hàng
+          </button>
+          <a
+            class="btn btn-outline-success"
+            style="background: #f05d40; color: white; border: 1px solid #f05d40"
+            href="{%url 'detail'%}?id={{product.id}}"
+            >Xem</a
+          >
+
+          {% comment %}
+          <div class="bg-color-shoppee font-100">aaaaaaaaaaaa</div>
+          {% endcomment %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <br /><br /><br /><br />
+    <br /><br /><br /><br />
+    <br /><br /><br /><br />
+    {% endblock register %}
+    <script src="" async defer></script>
+  </body>
+</html>

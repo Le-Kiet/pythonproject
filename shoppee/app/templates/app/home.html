@@ -1,0 +1,422 @@
+{% extends "app/base.html" %}
+
+<!--zmxnbczmxncbzmxcbzxmczxncmzxcbnm-->
+{% load static %}
+<!--zmxnbczmxncbzmxcbzxmczxncmzxcbnm-->
+{% block banner-slider %}
+<!--zmxnbczmxncbzmxcbzxmczxncmzxcbnm-->
+<div style="display: flex; justify-content: center; align-item: center">
+  <div id="carouselExampleCaptions" class="carousel slide">
+    <div class="carousel-indicators">
+      <button
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide-to="0"
+        class="active"
+        aria-current="true"
+        aria-label="Slide 1"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide-to="1"
+        aria-label="Slide 2"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide-to="2"
+        aria-label="Slide 3"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide-to="3"
+        aria-label="Slide 4"
+      ></button>
+    </div>
+    <div class="carousel-inner" style="margin: 32px 32px">
+      <div class="carousel-item active">
+        <img src="{% static "app/images/banner/b1.jpg" %}" class="d-block w-100"
+        alt="Sữa" height='440'/> {% comment %}
+        <div class="carousel-caption d-none d-md-block bg-success text-white">
+          <h5>Sữa</h5>
+          <p>Uống vào chóng lớn</p>
+        </div>
+        {% endcomment %}
+      </div>
+      <div class="carousel-item">
+        <img src="{% static "app/images/banner/b2.jpg" %}" class="d-block w-100"
+        alt="a" height='440' /> {% comment %}
+        <div class="carousel-caption d-none d-md-block bg-success text-white">
+          <h5>Second slide label</h5>
+          <p>Some representative placeholder content for the second slide.</p>
+        </div>
+        {% endcomment %}
+      </div>
+      <div class="carousel-item">
+        <img src="{% static "app/images/banner/b3.jpg" %}" class="d-block w-100"
+        alt="b" height='440'/> {% comment %}
+        <div class="carousel-caption d-none d-md-block bg-success text-white">
+          <h5>Third slide label</h5>
+          <p>Some representative placeholder content for the third slide.</p>
+        </div>
+        {% endcomment %}
+      </div>
+      <div class="carousel-item">
+        <img src="{% static "app/images/banner/b4.jpg" %}" class="d-block w-100"
+        alt="c" height='440'/> {% comment %}
+        <div class="carousel-caption d-none d-md-block bg-success text-white">
+          <h5>Third slide label</h5>
+          <p>Some representative placeholder content for the third slide.</p>
+        </div>
+        {% endcomment %}
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselExampleCaptions"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselExampleCaptions"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <div style="margin: 32px 32px">
+    <img src="{% static "app/images/banner/b2.jpg" %}" class="d-block w-100"
+    alt="Sữa" height='210' style="margin: 0px 10px"/>
+    <!---->
+    <img src="{% static "app/images/banner/b3.jpg" %}" class="d-block w-100"
+    alt="Sữa" height='210'style="margin: 20px 10px"/>
+  </div>
+</div>
+<hr />
+{% endblock banner-slider %}
+<!--zmxnbczmxncbzmxcbzxmczxncmzxcbnm-->
+{% block main-content %}
+<div
+  class="grid-container"
+  style="
+    width: 800px;
+    background-color: #e8e8e8;
+    padding: 20px;
+    margin: 20px auto;
+  "
+>
+  <p style="font-size: 24px">Danh mục</p>
+  <div style="position: relative">
+    <div
+      id="prev-button"
+      style="
+        position: absolute;
+        left: -5%;
+        top: 43%;
+        background-color: white;
+        border: 2px solid black;
+        border-radius: 50%;
+        padding: 20px;
+        z-index: 9999;
+      "
+    >
+      <div
+        class="carousel-arrow carousel-arrow--prev carousel-arrow--hint"
+        role="button"
+        tabindex="0"
+        style="
+          opacity: 1;
+          visibility: visible;
+          transform: translateX(calc(50% - 6px));
+          width: 20px;
+        "
+      >
+        <svg
+          enable-background="new 0 0 13 20"
+          viewBox="0 0 13 20"
+          x="0"
+          y="0"
+          class="shopee-svg-icon icon-arrow-left-bold"
+        >
+          <polygon
+            points="4.2 10 12.1 2.1 10 -.1 1 8.9 -.1 10 1 11 10 20 12.1 17.9"
+          ></polygon>
+        </svg>
+      </div>
+    </div>
+    <div
+      id="grid-container"
+      style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 0fr));
+        grid-template-rows: repeat(2, 1fr);
+        gap: 0px;
+      "
+    >
+      {% for category in categories %}
+      <a href="{% url 'category' %}?category={{category.slug}}">
+        <div
+          class="+K-jRT OooQQJ grid-content {% if forloop.counter > 10 %}hidden-category{% endif %}"
+          style="background-image: url('{{category.ImageURL}}'); background-size: contain; background-repeat: no-repeat; width:150px; height:200px; outline:1px solid black; position: relative;"
+        >
+          <p style="text-align: center; margin-left: 20px">{{category.name}}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+
+    <div
+      id="next-button"
+      style="
+        position: absolute;
+        right: -5%;
+        top: 43%;
+        background-color: white;
+        border: 2px solid black;
+        border-radius: 50%;
+        padding: 20px;
+      "
+    >
+      <div
+        class="carousel-arrow carousel-arrow--next"
+        role="button"
+        tabindex="0"
+        style="
+          opacity: 1;
+          visibility: visible;
+          transform: translateX(calc(50% - 6px));
+          width: 20px;
+        "
+      >
+        <svg
+          enable-background="new 0 0 13 21"
+          viewBox="0 0 13 21"
+          x="0"
+          y="0"
+          class="shopee-svg-icon icon-arrow-right-bold"
+        >
+          <polygon
+            points="11.1 9.9 2.1 .9 -.1 3.1 7.9 11 -.1 18.9 2.1 21 11.1 12 12.1 11"
+          ></polygon>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Đoạn mã script của bạn ở đây
+    var gridContainer = document.getElementById("grid-container");
+    var nextButton = document.getElementById("next-button");
+    var itemsPerPage = 10; // Số lượng phần tử hiển thị trên mỗi trang
+    var currentPage = 1; // Trang hiện tại
+
+    // Ẩn tất cả các phần tử trên trang, chỉ hiển thị phần tử của trang hiện tại
+    function showItems() {
+      var items = gridContainer.getElementsByClassName(
+        "+K-jRT OooQQJ grid-content"
+      );
+      var startIndex = (currentPage - 1) * itemsPerPage;
+      var endIndex = startIndex + itemsPerPage;
+
+      for (var i = 0; i < items.length; i++) {
+        if (i >= startIndex && i < endIndex) {
+          items[i].style.display = "block";
+        } else {
+          items[i].style.display = "none";
+        }
+      }
+    }
+
+    // Xử lý sự kiện khi bấm vào nút "button-arrow-next"
+    nextButton.addEventListener("click", function () {
+      currentPage++; // Tăng số trang hiện tại lên 1
+      showItems(); // Hiển thị các phần tử mới của trang hiện tại
+
+      // Ẩn các category dư
+      var hiddenItems = gridContainer.getElementsByClassName("hidden-category");
+      for (var i = 0; i < hiddenItems.length; i++) {
+        hiddenItems[i].classList.remove("hidden-category");
+      }
+    });
+
+    // Hiển thị trang đầu tiên khi tải trang
+    showItems();
+    var prevButton = document.getElementById("prev-button"); // Lấy thẻ HTML của nút "arrow-prev"
+
+    // Xử lý sự kiện khi bấm vào nút "arrow-prev"
+    prevButton.addEventListener("click", function () {
+      currentPage--; // Giảm số trang hiện tại đi 1
+      showItems(); // Hiển thị các phần tử mới của trang hiện tại
+
+      // Ẩn các category dư
+      var hiddenItems = gridContainer.getElementsByClassName("hidden-category");
+      for (var i = 0; i < hiddenItems.length; i++) {
+        hiddenItems[i].classList.remove("hidden-category");
+      }
+    });
+  </script>
+</div>
+<div style="display: flex; margin-top: 16px">
+  <div style="margin: 10px 20px; width: 200px; border-bottom: 1px solid red">
+    {% comment %} Tất cả danh mục
+    <hr />
+    {%for category in categories %}
+
+    <li style="text-decoration: none; list-style-type: none">
+      <a
+        class="dropdown-item"
+        href="{% url 'category' %}?category={{category.slug}}"
+        >{{category.name}}</a
+      >
+    </li>
+    {%endfor%} {% endcomment %} Nơi bán {% for a in province %}
+    <!---->
+    <li style="text-decoration: none; list-style-type: none; color: red">
+      <input
+        type="checkbox"
+        class="checkbox-input"
+        data-value="{{ a.name }}"
+        onclick="updateSelectedValues()"
+      />
+      <a class="dropdown-items" style="text-decoration: none">{{ a.name }}</a>
+    </li>
+
+    {% endfor %}
+  </div>
+  <div class="row" style="width: 100%">
+    <div>
+      <span>Sắp xếp theo</span>
+      <button
+        data-product="{{product.id}}"
+        data-action="add"
+        class="btn btn-outline-secondary add-btn update-cart"
+        style="background: #f05d40; color: white; border: 1px solid #f05d40"
+      >
+        Phổ biến
+      </button>
+      <button
+        data-product="{{product.id}}"
+        data-action="add"
+        class="btn btn-outline-secondary add-btn update-cart"
+        style="background: #f05d40; color: white; border: 1px solid #f05d40"
+      >
+        Mới nhất
+      </button>
+      <button
+        data-product="{{product.id}}"
+        data-action="add"
+        class="btn btn-outline-secondary add-btn update-cart"
+        style="background: #f05d40; color: white; border: 1px solid #f05d40"
+      >
+        Bán chạy
+      </button>
+      <button
+        data-product="{{product.id}}"
+        data-action="add"
+        class="btn btn-outline-secondary add-btn update-cart"
+        style="background: #f05d40; color: white; border: 1px solid #f05d40"
+      >
+        Giá
+      </button>
+    </div>
+    {% for product in products%}
+    <div class="col-lg-4" style="width: 25%">
+      <img class="thumbnail" src="{{product.ImageURL}}" style="width: 100%" />
+      <div class="box-element product">
+        <div style="margin-top: 10px">
+          <h6>{{product.name}}</h6>
+
+          <h4 style="display: inline-block; color: #f05d40">
+            <strong id="price" class="price">{{product.get_total }} $</strong>
+          </h4>
+          {% if product.discount != 0 %}
+          <h4
+            style="
+              display: inline-block;
+              color: rgba(0, 0, 0, 0.54);
+              text-decoration: line-through;
+              margin-left: 4px;
+            "
+          >
+            <strong id="discounted" class="discounted">
+              {{product.price }} $</strong
+            >
+          </h4>
+          <span
+            id="discount"
+            class="discount"
+            style="
+              color: #f05d40;
+              font-size: 20px;
+              background-color: #feeeea;
+              margin-left: 4px;
+            "
+          >
+            -{{product.discount}} %</span
+          >
+          {% endif %}
+        </div>
+        <hr />
+        <button
+          data-product="{{product.id}}"
+          data-action="add"
+          class="btn btn-outline-secondary add-btn update-cart"
+          style="
+            border: 1px solid #ee4d2d;
+            background-color: rgba(255, 87, 34, 0.1);
+            color: #ee4d2d;
+          "
+        >
+          <img
+            id="cart-icon"
+            src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/0f3bf6e431b6694a9aac.svg"
+          />
+          Thêm vào giỏ hàng
+        </button>
+        <a
+          class="btn btn-outline-success"
+          style="background: #f05d40; color: white; border: 1px solid #f05d40"
+          href="{%url 'detail'%}?id={{product.id}}"
+          >Xem</a
+        >
+
+        {% comment %}
+        <div class="bg-color-shoppee font-100">aaaaaaaaaaaa</div>
+        {% endcomment %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<script>
+  // JavaScript
+  var checkboxes = document.querySelectorAll(".checkbox-input");
+  var selectedValues = [];
+
+  function updateSelectedValues() {
+    selectedValues = Array.from(checkboxes)
+      .filter(function (checkbox) {
+        return checkbox.checked;
+      })
+      .map(function (checkbox) {
+        return checkbox.dataset.value;
+      });
+    var selectedValuesElement = document.getElementById("selected-values");
+    selectedValuesElement.textContent = selectedValues.join(", ");
+    console.log(selectedValues);
+  }
+
+  checkboxes.forEach(function (checkbox) {
+    checkbox.addEventListener("change", updateSelectedValues);
+  });
+
+  updateSelectedValues();
+</script>
+{% endblock main-content %}
